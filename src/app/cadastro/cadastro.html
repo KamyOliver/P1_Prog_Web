@@ -1,0 +1,92 @@
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-12 col-lg-8">
+      <div class="card shadow-sm">
+        <div class="card-header bg-dark text-white">
+          <h3 class="mb-0">Cadastro de Cliente</h3>
+        </div>
+
+        <div class="card-body">
+          @if (enviado) {
+            <div class="alert alert-success" role="alert">
+              <strong>Parabéns!</strong> Seu cadastro foi realizado com sucesso!
+            </div>
+          }
+
+          <form #form="ngForm" (ngSubmit)="cadastrar()" novalidate>
+            <div class="mb-3">
+              <label for="txtNome" class="form-label">Nome</label>
+              <input type="text" class="form-control" id="txtNome" name="nome"
+                [(ngModel)]="cliente.nome" #nome="ngModel"
+                placeholder="Informe o seu nome" required>
+              @if (nome.invalid && (nome.touched || form.submitted)) {
+                <div class="invalid-feedback d-block">Preencha esse campo!</div>
+              }
+            </div>
+
+            <div class="mb-3">
+              <label for="txtEmail" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="txtEmail" name="email"
+                [(ngModel)]="cliente.email" #email="ngModel"
+                placeholder="Informe o seu e-mail" required email>
+              @if (email.invalid && (email.touched || form.submitted)) {
+                <div class="invalid-feedback d-block">Informe um e-mail válido!</div>
+              }
+            </div>
+
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label for="txtTelefone" class="form-label">Telefone</label>
+                <input type="text" class="form-control" id="txtTelefone" name="telefone"
+                  [(ngModel)]="cliente.telefone" #telefone="ngModel"
+                  placeholder="(11) 99999-9999" required
+                  pattern="[0-9() .+-]{10,20}">
+                @if (telefone.invalid && (telefone.touched || form.submitted)) {
+                  <div class="invalid-feedback d-block">Informe um telefone válido!</div>
+                }
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="txtDocumento" class="form-label">Documento</label>
+                <input type="text" class="form-control" id="txtDocumento" name="documento"
+                  [(ngModel)]="cliente.documento" #documento="ngModel"
+                    placeholder="CPF ou documento" required
+                    pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}|[0-9]{11}">
+                @if (documento.invalid && (documento.touched || form.submitted)) {
+                  <div class="invalid-feedback d-block">Preencha esse campo!</div>
+                }
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label for="txtSenha" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="txtSenha" name="senha"
+                [(ngModel)]="cliente.senha" #senha="ngModel"
+                placeholder="Informe a sua senha" required
+                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%*?&])[A-Za-z0-9!@#$%*?&]{8,}">
+              @if (senha.invalid && (senha.touched || form.submitted)) {
+                <div class="invalid-feedback d-block">
+                  A senha deve ter 8 caracteres, maiúscula, minúscula, número e caractere especial.
+                </div>
+              }
+            </div>
+
+            <div class="mb-4">
+              <label for="txtLogradouro" class="form-label">Endereço</label>
+              <textarea class="form-control" id="txtLogradouro" name="logradouro"
+                [(ngModel)]="cliente.logradouro" #logradouro="ngModel"
+                placeholder="Informe o seu endereço completo" required rows="4"></textarea>
+              @if (logradouro.invalid && (logradouro.touched || form.submitted)) {
+                <div class="invalid-feedback d-block">Informe o endereço!</div>
+              }
+            </div>
+
+            <button type="submit" class="btn btn-success" [disabled]="form.invalid">
+              Cadastrar cliente
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

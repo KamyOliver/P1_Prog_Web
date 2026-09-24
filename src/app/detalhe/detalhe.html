@@ -1,0 +1,40 @@
+<div class="container py-4">
+  @if (produto) {
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-9">
+        <div class="card shadow-sm">
+          <div class="row g-0">
+            <div class="col-md-5 d-flex align-items-center justify-content-center bg-light p-4">
+              <img class="img-fluid produto-imagem" [src]="produto.codigo + '.jpg'"
+                [alt]="produto.nome" onerror="this.style.display='none'">
+            </div>
+
+            <div class="col-md-7">
+              <div class="card-body p-4">
+                <span class="badge text-bg-secondary mb-2">Código: {{ produto.codigo }}</span>
+                <h2 class="card-title">{{ produto.nome }}</h2>
+                <p class="card-text text-secondary">{{ produto.descritivo }}</p>
+
+                @if (produto.promo > 0) {
+                  <p class="mb-1">De: <s>R$ {{ produto.valor.toFixed(2) }}</s></p>
+                  <h3 class="text-success">Por: R$ {{ produto.promo.toFixed(2) }}</h3>
+                } @else {
+                  <h3>R$ {{ produto.valor.toFixed(2) }}</h3>
+                }
+
+                @if (produto.quantidade > 0) {
+                  <div class="alert alert-success py-2">Em estoque: {{ produto.quantidade }} unidade(s)</div>
+                  <button class="btn btn-success">Comprar</button>
+                } @else {
+                  <div class="alert alert-danger py-2">Produto indisponível no momento.</div>
+                }
+
+                <a routerLink="/vitrine" class="btn btn-outline-secondary ms-2">Voltar</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+</div>

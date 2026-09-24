@@ -1,0 +1,121 @@
+/* Remove espaços do componente */
+:host {
+  display: block;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* banner principal */
+
+.inicio-banner {
+  width: 100%;
+  height: 550px;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.lado-imagem {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.imagem-banner {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+
+/* area da primeira imagem */
+
+.secao-inicio {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.imagem-inicio {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* Promocoes */
+
+.secao-promocao {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.imagem-promocao {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0;
+  padding: 0;
+}
+
+
+/* CARROSSEL DE PROMOÇÕES */
+
+#promocoesCarousel {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.carousel-inner {
+  width: 100%;
+}
+
+.carousel-item {
+  width: 100%;
+}
+
+
+/* SETAS DO CARROSSEL - deixar ela mais centralizada*/
+
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
+.carousel-control-prev {
+  left: 10px;
+}
+
+.carousel-control-next {
+  right: 10px;
+}
+
+/* Deixa as setas pretas  no carrossel */
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(1);
+}
+
+
+/* RESPONSIVIDADE - padronização de tamnho de imagem decorrendo a qualquer dispositivo 
+    */
+
+@media (max-width: 768px) {
+  .inicio-banner {
+    height: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .inicio-banner {
+    height: 300px;
+  }
+}
