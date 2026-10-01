@@ -1,59 +1,80 @@
-# Web05
+# Abbey Road Records
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 22.1.3.
+Projeto desenvolvido para a **Prova 1 da disciplina de Programação na Web**, com foco no desenvolvimento **Front-End** de uma loja virtual de discos de vinil.
 
-## Development server
+O projeto foi desenvolvido utilizando **Angular**, **TypeScript**, **HTML**, **CSS** e **Bootstrap**, com atenção à responsividade, organização dos componentes e experiência de navegação.
 
-To start a local development server, run:
+---
 
-```bash
-ng serve
-```
+## Instituição
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+**Faculdade de Tecnologia do Estado de São Paulo - FATEC**
 
-## Code scaffolding
+### Disciplina
+Programação na Web
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+### Avaliação
+Prova 1 - Desenvolvimento Front-End
 
-```bash
-ng generate component component-name
-```
+### Professor
+Norton Glaser
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+### Alunos
+- Kamily Oliveira
+- Rafael Kenzo
 
-```bash
-ng generate --help
-```
+---
 
-## Building
+## Sobre o projeto
 
-To build the project run:
+O **Abbey Road Records** é uma loja virtual de discos de vinil desenvolvida como projeto acadêmico.
 
-```bash
-ng build
-```
+A aplicação apresenta um catálogo de discos de diferentes gêneros e artistas, permitindo ao usuário navegar pelos produtos, visualizar promoções, utilizar filtros e acessar informações detalhadas de cada disco.
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+O projeto também foi desenvolvido para se adaptar a diferentes tamanhos de tela, utilizando técnicas de responsividade.
 
-## Running unit tests
+---
 
-To execute unit tests with the [Vitest](https://vitest.dev/) test runner, use the following command:
+## Funcionalidades
 
-```bash
-ng test
-```
+- Página inicial
+- Catálogo de discos
+- Página de promoções
+- Filtros por categoria e artista
+- Paginação de produtos
+- Página de detalhes do produto
+- Carrinho de compras
+- Login
+- Cadastro de usuário
+- Navegação entre páginas utilizando Angular Router
+- Layout responsivo para computador, tablet e celular
 
-## Running end-to-end tests
+---
 
-For end-to-end (e2e) testing, run:
+## Tecnologias utilizadas
 
-```bash
-ng e2e
-```
+- Angular
+- TypeScript
+- HTML5
+- CSS3
+- Bootstrap
+- Angular Router
+- Git
+- GitHub
 
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
+---
 
-## Additional Resources
+## Responsividade
 
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+O projeto utiliza **Media Queries** para adaptar a interface a diferentes tamanhos de tela.
+
+Foram utilizados breakpoints como:
+
+```css
+/* Tablet */
+@media screen and (max-width: 768px) {
+}
+
+/* Celular */
+@media screen and (max-width: 480px) {
+}ion on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
