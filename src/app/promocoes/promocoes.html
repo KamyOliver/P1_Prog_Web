@@ -309,11 +309,12 @@
   </a>
 
 
-  <!-- Comprar -->
+  <!-- Comprar (espelhado de discos.html) -->
   <button
     type="button"
     class="botao-comprar"
     *ngIf="obj.estoque > 0"
+    (click)="comprar(obj)"
   >
     COMPRAR
   </button>
@@ -408,3 +409,5 @@
 
     </main>
     <!-- Fim área-disco -->
+  </section>
+</section>

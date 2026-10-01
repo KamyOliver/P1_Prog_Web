@@ -1,7 +1,8 @@
 import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Produto } from '../model/produto';
+import { ItemCesta } from '../model/item-cesta';
 
 @Component({
   imports: [CommonModule, RouterLink],
@@ -317,331 +318,260 @@ export class Promocoes implements OnInit {
   ];
   produtos = Promocoes.produtos;
 
-// =====================================
-// FILTROS
-// =====================================
+  // =====================================
+  // FILTROS
+  // =====================================
 
-// Categorias e artistas selecionados
-categoriasSelecionadas: string[] = [];
-artistasSelecionados: string[] = [];
+  categoriasSelecionadas: string[] = [];
+  artistasSelecionados: string[] = [];
 
-// Filtros aplicados quando clicar no botão FILTRAR
-categoriasAplicadas: string[] = [];
-artistasAplicados: string[] = [];
+  categoriasAplicadas: string[] = [];
+  artistasAplicados: string[] = [];
 
-// Artistas de cada categoria
-artistasPorCategoria: { [key: string]: string[] } = {
+  artistasPorCategoria: { [key: string]: string[] } = {
+    Grunge: [
+      'Alice in Chains',
+      'Nirvana',
+      'Soundgarden',
+      'Stone Temple Pilots'
+    ],
+    Rock: [
+      'Pink Floyd',
+      'Led Zeppelin',
+      'The Beatles'
+    ],
+    MPB: [
+      'Marcos Valle',
+      'Milton Nascimento'
+    ],
+    Rap: [
+      'Racionais MCs'
+    ]
+  };
 
-  Grunge: [
-    'Alice in Chains',
-    'Nirvana',
-    'Soundgarden',
-    'Stone Temple Pilots'
-  ],
+  // =====================================
+  // SELECIONAR CATEGORIA
+  // =====================================
 
-  Rock: [
-    'Pink Floyd',
-    'Led Zeppelin',
-    'The Beatles'
-  ],
+  selecionarCategoria(categoria: string, evento: Event) {
+    const checkbox = evento.target as HTMLInputElement;
 
-  MPB: [
-    'Marcos Valle',
-    'Milton Nascimento'
-  ],
-
-  Rap: [
-    'Racionais MCs'
-  ]
-
-};
-
-
-// =====================================
-// SELECIONAR CATEGORIA
-// =====================================
-
-selecionarCategoria(categoria: string, evento: Event) {
-
-  const checkbox = evento.target as HTMLInputElement;
-
-  if (checkbox.checked) {
-
-    this.categoriasSelecionadas.push(categoria);
-
-  } else {
-
-    this.categoriasSelecionadas =
-      this.categoriasSelecionadas.filter(
+    if (checkbox.checked) {
+      this.categoriasSelecionadas.push(categoria);
+    } else {
+      this.categoriasSelecionadas = this.categoriasSelecionadas.filter(
         item => item !== categoria
       );
-
+    }
   }
 
-}
+  // =====================================
+  // SELECIONAR ARTISTA
+  // =====================================
 
+  selecionarArtista(artista: string, evento: Event) {
+    const checkbox = evento.target as HTMLInputElement;
 
-// =====================================
-// SELECIONAR ARTISTA
-// =====================================
-
-selecionarArtista(artista: string, evento: Event) {
-
-  const checkbox = evento.target as HTMLInputElement;
-
-  if (checkbox.checked) {
-
-    this.artistasSelecionados.push(artista);
-
-  } else {
-
-    this.artistasSelecionados =
-      this.artistasSelecionados.filter(
+    if (checkbox.checked) {
+      this.artistasSelecionados.push(artista);
+    } else {
+      this.artistasSelecionados = this.artistasSelecionados.filter(
         item => item !== artista
       );
-
+    }
   }
 
-}
-// =====================================
-// LIMPAR FILTROS
-// =====================================
+  // =====================================
+  // LIMPAR FILTROS
+  // =====================================
 
-limparFiltros() {
+  limparFiltros() {
+    this.categoriasSelecionadas = [];
+    this.artistasSelecionados = [];
 
-  // Limpa categorias e artistas selecionados
+    this.categoriasAplicadas = [];
+    this.artistasAplicados = [];
 
-  this.categoriasSelecionadas = [];
-  this.artistasSelecionados = [];
+    this.paginaAtual = 1;
 
-
-  // Limpa os filtros aplicados
-
-  this.categoriasAplicadas = [];
-  this.artistasAplicados = [];
-
-
-  // Volta para a primeira página
-
-  this.paginaAtual = 1;
-
-
-  // Desmarca visualmente todos os checkboxes
-
-  const checkboxes = document.querySelectorAll(
-    '.caixa-filtros input[type="checkbox"]'
-  );
-
-  checkboxes.forEach((checkbox) => {
-
-    (checkbox as HTMLInputElement).checked = false;
-
-  });
-
-}
-
-
-// =====================================
-// MOSTRAR ARTISTAS DAS CATEGORIAS
-// =====================================
-
-get artistasDisponiveis(): string[] {
-
-  let artistas: string[] = [];
-
-  for (const categoria of this.categoriasSelecionadas) {
-
-    artistas.push(
-      ...(this.artistasPorCategoria[categoria] || [])
+    const checkboxes = document.querySelectorAll(
+      '.caixa-filtros input[type="checkbox"]'
     );
 
+    checkboxes.forEach((checkbox) => {
+      (checkbox as HTMLInputElement).checked = false;
+    });
   }
 
-  return [...new Set(artistas)];
+  // =====================================
+  // MOSTRAR ARTISTAS DAS CATEGORIAS
+  // =====================================
 
-}
+  get artistasDisponiveis(): string[] {
+    let artistas: string[] = [];
 
-
-// =====================================
-// PAGINAÇÃO
-// =====================================
-
-paginaAtual = 1;
-
-itensPorPagina = 9;
-
-
-// Detecta se está no navegador
-
-constructor(
-  @Inject(PLATFORM_ID) private platformId: Object
-) {}
-
-
-ngOnInit() {
-
-  if (isPlatformBrowser(this.platformId)) {
-
-    if (window.innerWidth <= 480) {
-      this.itensPorPagina = 4;
+    for (const categoria of this.categoriasSelecionadas) {
+      artistas.push(...(this.artistasPorCategoria[categoria] || []));
     }
 
+    return [...new Set(artistas)];
   }
 
-}
+  // =====================================
+  // PAGINAÇÃO
+  // =====================================
 
+  paginaAtual = 1;
+  itensPorPagina = 9;
 
-// =====================================
-// PRODUTOS DA PÁGINA ATUAL
-// =====================================
+  // Injetando Router exatamente como no Discos
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router
+  ) {}
 
-get produtosPaginados() {
-
-  const inicio =
-    (this.paginaAtual - 1) * this.itensPorPagina;
-
-  const fim =
-    inicio + this.itensPorPagina;
-
-  return this.produtosFiltrados.slice(
-    inicio,
-    fim
-  );
-
-}
-
-
-// =====================================
-// QUANTIDADE TOTAL DE PÁGINAS
-// =====================================
-
-get totalPaginas() {
-
-  return Math.ceil(
-    this.produtosFiltrados.length /
-    this.itensPorPagina
-  );
-
-}
-
-
-// =====================================
-// PÁGINAS DO COMPUTADOR
-// =====================================
-
-get paginas() {
-
-  return Array.from(
-    { length: this.totalPaginas },
-    (_, i) => i + 1
-  );
-
-}
-
-
-// =====================================
-// PÁGINAS DO CELULAR
-// =====================================
-
-get paginasMobile() {
-
-  const quantidadeVisivel = 4;
-
-  if (this.totalPaginas <= quantidadeVisivel) {
-    return this.paginas;
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (window.innerWidth <= 480) {
+        this.itensPorPagina = 4;
+      }
+    }
   }
 
-  let inicio = this.paginaAtual - 2;
+  // =====================================
+  // PRODUTOS DA PÁGINA ATUAL
+  // =====================================
 
-  if (inicio < 1) {
-    inicio = 1;
+  get produtosPaginados() {
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    const fim = inicio + this.itensPorPagina;
+
+    return this.produtosFiltrados.slice(inicio, fim);
   }
 
-  if (
-    inicio + quantidadeVisivel - 1 >
-    this.totalPaginas
-  ) {
+  // =====================================
+  // QUANTIDADE TOTAL DE PÁGINAS
+  // =====================================
 
-    inicio =
-      this.totalPaginas -
-      quantidadeVisivel +
-      1;
-
+  get totalPaginas() {
+    return Math.ceil(this.produtosFiltrados.length / this.itensPorPagina);
   }
 
-  return Array.from(
-    { length: quantidadeVisivel },
-    (_, i) => inicio + i
-  );
+  // =====================================
+  // PÁGINAS DO COMPUTADOR
+  // =====================================
 
-}
-
-
-// =====================================
-// TROCA DE PÁGINA
-// =====================================
-
-mudarPagina(pagina: number) {
-
-  if (
-    pagina >= 1 &&
-    pagina <= this.totalPaginas
-  ) {
-
-    this.paginaAtual = pagina;
-
+  get paginas() {
+    return Array.from({ length: this.totalPaginas }, (_, i) => i + 1);
   }
 
-}
+  // =====================================
+  // PÁGINAS DO CELULAR
+  // =====================================
 
+  get paginasMobile() {
+    const quantidadeVisivel = 4;
 
-// =====================================
-// APLICAR FILTROS
-// =====================================
+    if (this.totalPaginas <= quantidadeVisivel) {
+      return this.paginas;
+    }
 
-aplicarFiltros() {
+    let inicio = this.paginaAtual - 2;
 
-  this.categoriasAplicadas = [
-    ...this.categoriasSelecionadas
-  ];
+    if (inicio < 1) {
+      inicio = 1;
+    }
 
-  this.artistasAplicados = [
-    ...this.artistasSelecionados
-  ];
+    if (inicio + quantidadeVisivel - 1 > this.totalPaginas) {
+      inicio = this.totalPaginas - quantidadeVisivel + 1;
+    }
 
-  // Volta para a primeira página
+    return Array.from({ length: quantidadeVisivel }, (_, i) => inicio + i);
+  }
 
-  this.paginaAtual = 1;
+  // =====================================
+  // TROCA DE PÁGINA
+  // =====================================
 
-}
+  mudarPagina(pagina: number) {
+    if (pagina >= 1 && pagina <= this.totalPaginas) {
+      this.paginaAtual = pagina;
+    }
+  }
 
+  // =====================================
+  // APLICAR FILTROS
+  // =====================================
 
-// =====================================
-// PRODUTOS FILTRADOS
-// =====================================
+  aplicarFiltros() {
+    this.categoriasAplicadas = [...this.categoriasSelecionadas];
+    this.artistasAplicados = [...this.artistasSelecionados];
+    this.paginaAtual = 1;
+  }
 
-get produtosFiltrados() {
+  // =====================================
+  // PRODUTOS FILTRADOS
+  // =====================================
 
-  return this.produtos.filter(produto => {
+  get produtosFiltrados() {
+    return this.produtos.filter(produto => {
+      const categoriaCorreta =
+        this.categoriasAplicadas.length === 0 ||
+        this.categoriasAplicadas.includes(produto.genero);
 
-    // Verifica a categoria
+      const artistaCorreto =
+        this.artistasAplicados.length === 0 ||
+        this.artistasAplicados.includes(produto.banda);
 
-    const categoriaCorreta =
-      this.categoriasAplicadas.length === 0 ||
-      this.categoriasAplicadas.includes(produto.genero);
+      return categoriaCorreta && artistaCorreto;
+    });
+  }
 
+  // =====================================
+  // ADICIONAR PRODUTO À CESTA (Idêntico ao discos.ts)
+  // =====================================
 
-    // Verifica o artista
+  comprar(produto: Produto) {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
 
-    const artistaCorreto =
-      this.artistasAplicados.length === 0 ||
-      this.artistasAplicados.includes(produto.banda);
+    let cesta: ItemCesta[] = [];
+    const json = localStorage.getItem('cesta');
 
+    if (json != null) {
+      try {
+        cesta = JSON.parse(json);
+      } catch {
+        cesta = [];
+      }
+    }
 
-    return categoriaCorreta && artistaCorreto;
+    const itemExistente = cesta.find(
+      item => item.produto.codigo === produto.codigo
+    );
 
-  });
+    const valorUnitario = (produto.desconto && produto.desconto > 0 && produto.valorDesconto !== undefined)
+      ? produto.valorDesconto
+      : produto.valor;
 
-}
+    if (itemExistente) {
+      if (itemExistente.quantidade < produto.estoque) {
+        itemExistente.quantidade++;
+        itemExistente.valorTotal = itemExistente.quantidade * valorUnitario;
+      }
+    } else {
+      const novoItem = new ItemCesta();
+      novoItem.produto = produto;
+      novoItem.quantidade = 1;
+      novoItem.valorTotal = valorUnitario;
 
+      cesta.push(novoItem);
+    }
+
+    localStorage.setItem('cesta', JSON.stringify(cesta));
+
+    // Redireciona diretamente para a página da cesta
+    this.router.navigate(['/cesta']);
+  }
 }

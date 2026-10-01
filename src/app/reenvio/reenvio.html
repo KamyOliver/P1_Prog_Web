@@ -1,1 +1,37 @@
-<p>reenvio works!</p>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-header text-white" style="background-color: #273014 ;">
+          <h3 class="mb-0"> <strong>Insira seu e-mail para a recuperação</strong> </h3>
+        </div>
+
+        <div class="card-body text-white" style="background-color: #12181b ;">
+          @if (enviado) {
+            <div class="alert alert-success" role="alert">
+              Um e-mail de recuperação de senha foi enviado para o seu endereço de e-mail. Por favor, verifique sua caixa de entrada.
+            </div>
+          }
+
+          <form #form="ngForm" (ngSubmit)="entrar(); form.resetForm()" novalidate>
+            <div class="mb-3">
+              <label for="txtEmail" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="txtEmail" name="email"
+                [(ngModel)]="usuario.email" #email="ngModel"
+                placeholder="Informe o seu e-mail" required email>
+              @if (email.invalid && (email.touched || form.submitted)) {
+                <div class="invalid-feedback d-block">Informe um e-mail válido!</div>
+              }
+            </div>
+
+            <button type="submit" class="btn btn-logar w-100 mb-3">
+              Enviar
+            </button>
+          </form>
+
+          <hr class="border-secondary my-4">
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

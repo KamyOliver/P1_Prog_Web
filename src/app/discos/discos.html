@@ -328,6 +328,7 @@
                 type="button"
                 class="botao-comprar"
                 *ngIf="obj.estoque > 0"
+                (click)="comprar(obj)"
               >
                 COMPRAR
               </button>
@@ -342,77 +343,77 @@
       </div>
 
 
-<!-- ===================================== -->
-<!-- PAGINAÇÃO -->
-<!-- ===================================== -->
+      <!-- ===================================== -->
+      <!-- PAGINAÇÃO -->
+      <!-- ===================================== -->
 
-<div
-  class="paginacao"
-  *ngIf="totalPaginas > 1"
->
+      <div
+        class="paginacao"
+        *ngIf="totalPaginas > 1"
+      >
 
-  <!-- Página anterior -->
+        <!-- Página anterior -->
 
-  <button
-    type="button"
-    class="botao-pagina"
-    [disabled]="paginaAtual === 1"
-    (click)="mudarPagina(paginaAtual - 1)"
-  >
-    ‹
-  </button>
-
-
-  <!-- ===================================== -->
-  <!-- NÚMEROS - COMPUTADOR -->
-  <!-- ===================================== -->
-
-  <div class="paginas-desktop">
-
-    <button
-      type="button"
-      class="botao-pagina"
-      *ngFor="let pagina of paginas"
-      [class.pagina-ativa]="paginaAtual === pagina"
-      (click)="mudarPagina(pagina)"
-    >
-      {{ pagina }}
-    </button>
-
-  </div>
+        <button
+          type="button"
+          class="botao-pagina"
+          [disabled]="paginaAtual === 1"
+          (click)="mudarPagina(paginaAtual - 1)"
+        >
+          ‹
+        </button>
 
 
-  <!-- ===================================== -->
-  <!-- NÚMEROS - CELULAR -->
-  <!-- ===================================== -->
+        <!-- ===================================== -->
+        <!-- NÚMEROS - COMPUTADOR -->
+        <!-- ===================================== -->
 
-  <div class="paginas-mobile">
+        <div class="paginas-desktop">
 
-    <button
-      type="button"
-      class="botao-pagina"
-      *ngFor="let pagina of paginasMobile"
-      [class.pagina-ativa]="paginaAtual === pagina"
-      (click)="mudarPagina(pagina)"
-    >
-      {{ pagina }}
-    </button>
+          <button
+            type="button"
+            class="botao-pagina"
+            *ngFor="let pagina of paginas"
+            [class.pagina-ativa]="paginaAtual === pagina"
+            (click)="mudarPagina(pagina)"
+          >
+            {{ pagina }}
+          </button>
 
-  </div>
+        </div>
 
 
-  <!-- Próxima página -->
+        <!-- ===================================== -->
+        <!-- NÚMEROS - CELULAR -->
+        <!-- ===================================== -->
 
-  <button
-    type="button"
-    class="botao-pagina"
-    [disabled]="paginaAtual === totalPaginas"
-    (click)="mudarPagina(paginaAtual + 1)"
-  >
-    ›
-  </button>
+        <div class="paginas-mobile">
 
-</div>
+          <button
+            type="button"
+            class="botao-pagina"
+            *ngFor="let pagina of paginasMobile"
+            [class.pagina-ativa]="paginaAtual === pagina"
+            (click)="mudarPagina(pagina)"
+          >
+            {{ pagina }}
+          </button>
+
+        </div>
+
+
+        <!-- Próxima página -->
+
+        <button
+          type="button"
+          class="botao-pagina"
+          [disabled]="paginaAtual === totalPaginas"
+          (click)="mudarPagina(paginaAtual + 1)"
+        >
+          ›
+        </button>
+
+      </div>
 
     </main>
 

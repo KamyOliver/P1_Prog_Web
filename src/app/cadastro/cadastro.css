@@ -1,0 +1,49 @@
+.card {
+  border: 0;
+}
+
+.card-header {
+  padding: 16px 20px;
+}
+
+.form-control {
+  border-color: #273014;
+  background-color: #12181b;
+  color: White;
+}
+
+.form-control::placeholder {
+  color: white;
+}
+
+.form-control:focus {
+  background-color: #12181b;
+  color: white;
+  border-color: #273014;
+  box-shadow: 0 0 0 4px #273014;
+}
+
+.btn-cadastro {
+  background-color: #12181b;
+  border-color: #749b22;
+  color: White;
+  transition: all 0.3s ease;
+}
+
+.btn-cadastro:hover {
+  background-color: #495e1d;
+  border-color: #12181b;
+  cursor: pointer;                      
+  transform: translateY(-1px);
+  transform: translateX(1px);
+}
+
+.alert-success {
+  background-color: #12181b;
+  border-color: #9fd32e;
+  color: White;
+}
+
+* {
+  font-family: 'Montserrat', sans-serif;
+}

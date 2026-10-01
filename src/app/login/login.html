@@ -1,21 +1,64 @@
-<h3>Faça seu login</h3>
-<div class="alert alert-warning"><strong>Verifique!</strong> 
-    email ou senha incorretos!</div>
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-md-8 col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-header text-white" style="background-color: #273014 ;">
+          <h3 class="mb-0"> <strong>Faça seu Login</strong> </h3>
+        </div>
 
-<div class="row">   
-    <div class="col">
-    Ja tenho cadastro, informe o seu e-mail e senha<br>
-    <label  class="form-label">email:</label>
-    <input type="email" id="email"  class="form-control"><Br>
-    <label  class="form-label">senha:</label>
-    <input type="senha" id="senha"  class="form-control"><br>
-    <button class="btn btn-outline-success w-100">Entrar</button>
+        <div class="card-body text-white" style="background-color: #12181b ;">
+          @if (enviado) {
+            <div class="alert alert-success" role="alert">
+              Parabéns! Seu login foi realizado com sucesso!
+            </div>
+          }
+
+          <form #form="ngForm" (ngSubmit)="entrar(); form.resetForm()" novalidate>
+            <div class="mb-3">
+              <label for="txtEmail" class="form-label">E-mail</label>
+              <input type="email" class="form-control" id="txtEmail" name="email"
+                [(ngModel)]="usuario.email" #email="ngModel"
+                placeholder="Informe o seu e-mail" required email>
+              @if (email.invalid && (email.touched || form.submitted)) {
+                <div class="invalid-feedback d-block">Informe um e-mail válido!</div>
+              }
+            </div>
+
+            <div class="mb-4">
+              <label for="txtSenha" class="form-label">Senha</label>
+              <input type="password" class="form-control" id="txtSenha" name="senha"
+                [(ngModel)]="usuario.senha" #senha="ngModel"
+                placeholder="Informe a sua senha" required
+                pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%*?&])[A-Za-z0-9!@#$%*?&]{8,}">
+              @if (senha.invalid && (senha.touched || form.submitted)) {
+                <div class="invalid-feedback d-block">
+                  A senha deve ter 8 caracteres, maiúscula, minúscula, número e caractere especial.
+                </div>
+              }
+            </div>
+
+            <button type="submit" class="btn btn-logar w-100 mb-3">
+              Entrar
+            </button>
+          </form>
+
+          <hr class="border-secondary my-4">
+
+          <div class="d-flex flex-column gap-2 text-center">
+            <span class="text-white-50">Ainda não tem cadastro?</span>
+            <a href="/cadastro" class="btn btn-outline-light btn-sm">
+              Faça seu novo cadastro
+            </a>
+
+            <span class="text-white-50 mt-2">Esqueceu a senha?</span>
+            <a href="/reenvio" class="btn btn-outline-secondary btn-sm">
+              Recuperar minha senha
+            </a>
+
+            <hr class="border-secondary my-4">
+          </div>
+        </div>
+      </div>
     </div>
-    <div  class="col">
-    Ainda não tenho cadastro:<br>
-    <a href="cadastro" class="btn btn-outline-primary w-100">faça seu novo cadastro</a>
-    <br>
-    Esqueci minha senha: <br>
-    <a href="reenvio" class="btn btn-outline-danger w-100">Esqueci minha senha</a>
-    </div>
+  </div>
 </div>

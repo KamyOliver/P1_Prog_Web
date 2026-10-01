@@ -2,14 +2,14 @@
   <div class="row justify-content-center">
     <div class="col-12 col-lg-8">
       <div class="card shadow-sm">
-        <div class="card-header bg-dark text-white">
-          <h3 class="mb-0">Cadastro de Cliente</h3>
+        <div class="card-header text-white" style="background-color: #273014 ;">
+          <h3 class="mb-0"> <strong>Cadastro de Cliente</strong> </h3>
         </div>
 
-        <div class="card-body">
+        <div class="card-body text-white" style="background-color: #12181b ;">
           @if (enviado) {
             <div class="alert alert-success" role="alert">
-              <strong>Parabéns!</strong> Seu cadastro foi realizado com sucesso!
+              Parabéns! Seu cadastro foi realizado com sucesso!
             </div>
           }
 
@@ -37,7 +37,7 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label for="txtTelefone" class="form-label">Telefone</label>
-                <input type="text" class="form-control" id="txtTelefone" name="telefone"
+                <input type="text" class="form-control" id="txtTelefone" name="telefone" 
                   [(ngModel)]="cliente.telefone" #telefone="ngModel"
                   placeholder="(11) 99999-9999" required
                   pattern="[0-9() .+-]{10,20}">
@@ -45,10 +45,9 @@
                   <div class="invalid-feedback d-block">Informe um telefone válido!</div>
                 }
               </div>
-
               <div class="col-md-6 mb-3">
                 <label for="txtDocumento" class="form-label">Documento</label>
-                <input type="text" class="form-control" id="txtDocumento" name="documento"
+                <input type="text" class="form-control" id="txtDocumento" name="documento" 
                   [(ngModel)]="cliente.documento" #documento="ngModel"
                     placeholder="CPF ou documento" required
                     pattern="[0-9]{3}\.[0-9]{3}\.[0-9]{3}-[0-9]{2}|[0-9]{11}">
@@ -75,13 +74,13 @@
               <label for="txtLogradouro" class="form-label">Endereço</label>
               <textarea class="form-control" id="txtLogradouro" name="logradouro"
                 [(ngModel)]="cliente.logradouro" #logradouro="ngModel"
-                placeholder="Informe o seu endereço completo" required rows="4"></textarea>
+                placeholder="Informe o seu endereço completo" required rows="2"></textarea>
               @if (logradouro.invalid && (logradouro.touched || form.submitted)) {
                 <div class="invalid-feedback d-block">Informe o endereço!</div>
               }
             </div>
 
-            <button type="submit" class="btn btn-success" [disabled]="form.invalid">
+            <button type="submit" class="btn btn-success btn-cadastro">
               Cadastrar cliente
             </button>
           </form>

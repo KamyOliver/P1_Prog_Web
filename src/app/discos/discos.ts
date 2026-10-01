@@ -1,7 +1,8 @@
 import { Component, Inject, PLATFORM_ID, OnInit } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { Produto } from '../model/produto';
+import { ItemCesta } from '../model/item-cesta';
 
 @Component({
   imports: [CommonModule, RouterLink],
@@ -473,348 +474,258 @@ export class Discos implements OnInit {
   produtos = Discos.produtos;
 
   // ==========================================
-// FILTROS
-// ==========================================
+  // FILTROS
+  // ==========================================
 
-categoriasSelecionadas: string[] = [];
-artistasSelecionados: string[] = [];
+  categoriasSelecionadas: string[] = [];
+  artistasSelecionados: string[] = [];
 
-categoriasAplicadas: string[] = [];
-artistasAplicados: string[] = [];
+  categoriasAplicadas: string[] = [];
+  artistasAplicados: string[] = [];
 
+  artistasPorCategoria: { [key: string]: string[] } = {
+    Grunge: [
+      'Alice in Chains',
+      'Nirvana',
+      'Soundgarden',
+      'Stone Temple Pilots'
+    ],
+    Rock: [
+      'The Beatles',
+      'Led Zeppelin',
+      'Pink Floyd'
+    ],
+    Rap: [
+      'Racionais'
+    ],
+    MPB: [
+      'Marcos Valle',
+      'Milton Nascimento'
+    ]
+  };
 
-// Artistas disponíveis para cada gênero
+  paginaAtual = 1;
+  itensPorPagina = 9;
 
-artistasPorCategoria: { [key: string]: string[] } = {
+  constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private router: Router
+  ) {}
 
-  Grunge: [
-    'Alice in Chains',
-    'Nirvana',
-    'Soundgarden',
-    'Stone Temple Pilots'
-  ],
+  ngOnInit() {
+    if (isPlatformBrowser(this.platformId)) {
+      if (window.innerWidth <= 480) {
+        this.itensPorPagina = 4;
+      }
+    }
+  }
 
-  Rock: [
-    'The Beatles',
-    'Led Zeppelin',
-    'Pink Floyd'
-  ],
+  // ==========================================
+  // SELECIONAR GÊNERO
+  // ==========================================
 
-  Rap: [
-    'Racionais'
-  ],
+  selecionarCategoria(categoria: string, evento: Event) {
+    const checkbox = evento.target as HTMLInputElement;
 
-  MPB: [
-    'Marcos Valle',
-    'Milton Nascimento'
-  ]
-
-};
-
-// ==========================================
-// SELECIONAR GÊNERO
-// ==========================================
-
-selecionarCategoria(categoria: string, evento: Event) {
-
-  const checkbox = evento.target as HTMLInputElement;
-
-  if (checkbox.checked) {
-
-    this.categoriasSelecionadas.push(categoria);
-
-  } else {
-
-    this.categoriasSelecionadas =
-      this.categoriasSelecionadas.filter(
+    if (checkbox.checked) {
+      this.categoriasSelecionadas.push(categoria);
+    } else {
+      this.categoriasSelecionadas = this.categoriasSelecionadas.filter(
         item => item !== categoria
       );
 
-    // Remove artistas que não pertencem mais
-    // aos gêneros selecionados
-
-    this.artistasSelecionados =
-      this.artistasSelecionados.filter(
+      this.artistasSelecionados = this.artistasSelecionados.filter(
         artista => this.artistasDisponiveis.includes(artista)
       );
-
+    }
   }
 
-}
+  // ==========================================
+  // SELECIONAR ARTISTA
+  // ==========================================
 
+  selecionarArtista(artista: string, evento: Event) {
+    const checkbox = evento.target as HTMLInputElement;
 
-// ==========================================
-// SELECIONAR ARTISTA
-// ==========================================
-
-selecionarArtista(artista: string, evento: Event) {
-
-  const checkbox = evento.target as HTMLInputElement;
-
-  if (checkbox.checked) {
-
-    this.artistasSelecionados.push(artista);
-
-  } else {
-
-    this.artistasSelecionados =
-      this.artistasSelecionados.filter(
+    if (checkbox.checked) {
+      this.artistasSelecionados.push(artista);
+    } else {
+      this.artistasSelecionados = this.artistasSelecionados.filter(
         item => item !== artista
       );
-
+    }
   }
 
-}
+  // ==========================================
+  // ARTISTAS DISPONÍVEIS
+  // ==========================================
 
+  get artistasDisponiveis(): string[] {
+    let artistas: string[] = [];
 
-// ==========================================
-// ARTISTAS DISPONÍVEIS
-// ==========================================
-
-get artistasDisponiveis(): string[] {
-
-  let artistas: string[] = [];
-
-  for (const categoria of this.categoriasSelecionadas) {
-
-    artistas.push(
-      ...(this.artistasPorCategoria[categoria] || [])
-    );
-
-  }
-
-  return [...new Set(artistas)];
-
-}
-
-
-// ==========================================
-// APLICAR FILTROS
-// ==========================================
-
-aplicarFiltros() {
-
-  this.categoriasAplicadas = [
-    ...this.categoriasSelecionadas
-  ];
-
-  this.artistasAplicados = [
-    ...this.artistasSelecionados
-  ];
-
-  this.paginaAtual = 1;
-
-}
-
-
-// ==========================================
-// PRODUTOS FILTRADOS
-// ==========================================
-
-get produtosFiltrados() {
-
-  return this.produtos.filter(produto => {
-
-    const categoriaCorreta =
-      this.categoriasAplicadas.length === 0 ||
-      this.categoriasAplicadas.includes(produto.genero);
-
-    const artistaCorreto =
-      this.artistasAplicados.length === 0 ||
-      this.artistasAplicados.includes(produto.banda);
-
-    return categoriaCorreta && artistaCorreto;
-
-  });
-
-}
-
-
-// ==========================================
-// LIMPAR FILTROS
-// ==========================================
-
-limparFiltros() {
-
-  this.categoriasSelecionadas = [];
-  this.artistasSelecionados = [];
-
-  this.categoriasAplicadas = [];
-  this.artistasAplicados = [];
-
-  this.paginaAtual = 1;
-
-
-  // Desmarca visualmente os checkboxes
-
-  const checkboxes = document.querySelectorAll(
-    '.caixa-filtros input[type="checkbox"]'
-  );
-
-  checkboxes.forEach((checkbox) => {
-
-    (checkbox as HTMLInputElement).checked = false;
-
-  });
-
-}
- // ==========================================
-// PAGINAÇÃO
-// ==========================================
-
-paginaAtual = 1;
-
-itensPorPagina = 9;
-
-
-// Detecta se está no navegador e ajusta
-// a quantidade de discos no celular
-
-constructor(
-  @Inject(PLATFORM_ID) private platformId: Object
-) {}
-
-
-ngOnInit() {
-
-  if (isPlatformBrowser(this.platformId)) {
-
-    if (window.innerWidth <= 480) {
-      this.itensPorPagina = 4;
+    for (const categoria of this.categoriasSelecionadas) {
+      artistas.push(...(this.artistasPorCategoria[categoria] || []));
     }
 
+    return [...new Set(artistas)];
   }
 
-}
+  // ==========================================
+  // APLICAR FILTROS
+  // ==========================================
 
-
-// ==========================================
-// PRODUTOS DA PÁGINA ATUAL
-// ==========================================
-
-get produtosPaginados() {
-
-  const inicio =
-    (this.paginaAtual - 1) * this.itensPorPagina;
-
-  const fim =
-    inicio + this.itensPorPagina;
-
-  return this.produtosFiltrados.slice(
-    inicio,
-    fim
-  );
-
-}
-
-
-// ==========================================
-// QUANTIDADE TOTAL DE PÁGINAS
-// ==========================================
-
-get totalPaginas() {
-
-  return Math.ceil(
-    this.produtosFiltrados.length /
-    this.itensPorPagina
-  );
-
-}
-
-
-// ==========================================
-// PÁGINAS DO COMPUTADOR
-// ==========================================
-
-// No computador mostra todas as páginas
-
-get paginas() {
-
-  return Array.from(
-    { length: this.totalPaginas },
-    (_, i) => i + 1
-  );
-
-}
-
-
-// ==========================================
-// PÁGINAS DO CELULAR
-// ==========================================
-
-// No celular mostra somente 4 números por vez
-
-get paginasMobile() {
-
-  const quantidadeVisivel = 4;
-
-
-  // Se existirem 4 páginas ou menos,
-// mostra todas
-
-  if (this.totalPaginas <= quantidadeVisivel) {
-
-    return this.paginas;
-
+  aplicarFiltros() {
+    this.categoriasAplicadas = [...this.categoriasSelecionadas];
+    this.artistasAplicados = [...this.artistasSelecionados];
+    this.paginaAtual = 1;
   }
 
+  // ==========================================
+  // PRODUTOS FILTRADOS
+  // ==========================================
 
-  // Calcula onde a sequência deve começar
+  get produtosFiltrados() {
+    return this.produtos.filter(produto => {
+      const categoriaCorreta =
+        this.categoriasAplicadas.length === 0 ||
+        this.categoriasAplicadas.includes(produto.genero);
 
-  let inicio = this.paginaAtual - 2;
+      const artistaCorreto =
+        this.artistasAplicados.length === 0 ||
+        this.artistasAplicados.includes(produto.banda);
 
-
-  // Não permite começar antes da página 1
-
-  if (inicio < 1) {
-
-    inicio = 1;
-
+      return categoriaCorreta && artistaCorreto;
+    });
   }
 
+  // ==========================================
+  // LIMPAR FILTROS
+  // ==========================================
 
-  // Não permite passar da última página
+  limparFiltros() {
+    this.categoriasSelecionadas = [];
+    this.artistasSelecionados = [];
 
-  if (
-    inicio + quantidadeVisivel - 1 >
-    this.totalPaginas
-  ) {
+    this.categoriasAplicadas = [];
+    this.artistasAplicados = [];
 
-    inicio =
-      this.totalPaginas -
-      quantidadeVisivel +
-      1;
+    this.paginaAtual = 1;
 
+    const checkboxes = document.querySelectorAll(
+      '.caixa-filtros input[type="checkbox"]'
+    );
+
+    checkboxes.forEach((checkbox) => {
+      (checkbox as HTMLInputElement).checked = false;
+    });
   }
 
+  // ==========================================
+  // PRODUTOS DA PÁGINA ATUAL
+  // ==========================================
 
-  // Cria os 4 números que serão exibidos
+  get produtosPaginados() {
+    const inicio = (this.paginaAtual - 1) * this.itensPorPagina;
+    const fim = inicio + this.itensPorPagina;
 
-  return Array.from(
-    { length: quantidadeVisivel },
-    (_, i) => inicio + i
-  );
-
-}
-
-
-// ==========================================
-// TROCA DE PÁGINA
-// ==========================================
-
-mudarPagina(pagina: number) {
-
-  if (
-    pagina >= 1 &&
-    pagina <= this.totalPaginas
-  ) {
-
-    this.paginaAtual = pagina;
-
+    return this.produtosFiltrados.slice(inicio, fim);
   }
 
+  // ==========================================
+  // QUANTIDADE TOTAL DE PÁGINAS
+  // ==========================================
+
+  get totalPaginas() {
+    return Math.ceil(this.produtosFiltrados.length / this.itensPorPagina);
+  }
+
+  // ==========================================
+  // PÁGINAS DO COMPUTADOR
+  // ==========================================
+
+  get paginas() {
+    return Array.from({ length: this.totalPaginas }, (_, i) => i + 1);
+  }
+
+  // ==========================================
+  // PÁGINAS DO CELULAR
+  // ==========================================
+
+  get paginasMobile() {
+    const quantidadeVisivel = 4;
+
+    if (this.totalPaginas <= quantidadeVisivel) {
+      return this.paginas;
+    }
+
+    let inicio = this.paginaAtual - 2;
+
+    if (inicio < 1) {
+      inicio = 1;
+    }
+
+    if (inicio + quantidadeVisivel - 1 > this.totalPaginas) {
+      inicio = this.totalPaginas - quantidadeVisivel + 1;
+    }
+
+    return Array.from({ length: quantidadeVisivel }, (_, i) => inicio + i);
+  }
+
+  // ==========================================
+  // TROCA DE PÁGINA
+  // ==========================================
+
+  mudarPagina(pagina: number) {
+    if (pagina >= 1 && pagina <= this.totalPaginas) {
+      this.paginaAtual = pagina;
+    }
+  }
+
+  // ==========================================
+  // ADICIONAR PRODUTO À CESTA
+  // ==========================================
+
+  comprar(produto: Produto) {
+    if (!isPlatformBrowser(this.platformId)) {
+      return;
+    }
+
+    let cesta: ItemCesta[] = [];
+    const json = localStorage.getItem('cesta');
+
+    if (json != null) {
+      try {
+        cesta = JSON.parse(json);
+      } catch {
+        cesta = [];
+      }
+    }
+
+    const itemExistente = cesta.find(
+      item => item.produto.codigo === produto.codigo
+    );
+
+    const valorUnitario = (produto.desconto && produto.desconto > 0 && produto.valorDesconto !== undefined)
+      ? produto.valorDesconto
+      : produto.valor;
+
+    if (itemExistente) {
+      if (itemExistente.quantidade < produto.estoque) {
+        itemExistente.quantidade++;
+        itemExistente.valorTotal = itemExistente.quantidade * valorUnitario;
+      }
+    } else {
+      const novoItem = new ItemCesta();
+      novoItem.produto = produto;
+      novoItem.quantidade = 1;
+      novoItem.valorTotal = valorUnitario;
+
+      cesta.push(novoItem);
+    }
+
+    localStorage.setItem('cesta', JSON.stringify(cesta));
+
+    // Redireciona direto para a página da cesta
+    this.router.navigate(['/cesta']);
+  }
 }
-
-}
-
-

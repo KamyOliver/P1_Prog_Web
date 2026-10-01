@@ -1,1 +1,148 @@
-<p>cesta works!</p>
+<section class="pagina-cesta">
+  <div class="conteudo-cesta">
+    <div class="titulo-cesta">
+      <p class="subtitulo">ABBEY ROAD RECORDS</p>
+      <h1>Sua cesta</h1>
+      <p>Revise seus discos antes de finalizar o pedido.</p>
+    </div>
+
+    <!-- MENSAGEM DE SUCESSO / VENDA CONCLUÍDA -->
+    <div class="cesta-vazia sucesso-compra" *ngIf="compraFinalizada">
+      <div class="icone-vinil icone-sucesso">✓</div>
+      <h2>Pedido realizado com sucesso!</h2>
+      <p class="mensagem-venda">
+        Vendido! A sua encomenda foi confirmada e os seus discos estão prontos para envio.
+      </p>
+      <div class="destaque-total">
+        <span>Total pago:</span>
+        <strong>R$ {{ totalPago.toFixed(2).replace('.', ',') }}</strong>
+      </div>
+      <a routerLink="/discos" (click)="novaCompra()" class="botao-continuar">
+        CONTINUAR A COMPRAR
+      </a>
+    </div>
+
+    <!-- CESTA VAZIA (CASO NÃO TENHA SIDO UMA COMPRA RECÉM-FINALIZADA) -->
+    <div class="cesta-vazia" *ngIf="!compraFinalizada && lista.length <= 0">
+      <div class="icone-vinil">♪</div>
+      <h2>Sua cesta está vazia</h2>
+      <p>Você ainda não adicionou nenhum disco à sua coleção.</p>
+      <a routerLink="/discos" class="botao-continuar">VER DISCOS</a>
+    </div>
+
+    <!-- ITENS DA CESTA -->
+    <div class="layout-cesta" *ngIf="!compraFinalizada && lista.length > 0">
+      <div class="lista-produtos">
+        <article class="item-cesta" *ngFor="let item of lista">
+          <div class="capa-disco">
+            <img
+              [src]="'discos/' + item.produto.codigo + '.png'"
+              [alt]="item.produto.album"
+            >
+          </div>
+
+          <div class="informacoes-disco">
+            <div class="topo-item">
+              <div>
+                <span class="genero">{{ item.produto.genero }}</span>
+                <h2>{{ item.produto.album }}</h2>
+                <p class="banda">{{ item.produto.banda }}</p>
+                <p class="estado">Estado: {{ item.produto.estado }}</p>
+              </div>
+
+              <button
+                type="button"
+                class="botao-remover"
+                (click)="remover(item)"
+              >
+                REMOVER
+              </button>
+            </div>
+
+            <div class="rodape-item">
+              <div class="controle-quantidade">
+                <span>Quantidade</span>
+                <div class="quantidade">
+                  <button
+                    type="button"
+                    (click)="diminuirQuantidade(item)"
+                    [disabled]="item.quantidade <= 1"
+                    aria-label="Diminuir quantidade"
+                  >−</button>
+
+                  <strong>{{ item.quantidade }}</strong>
+
+                  <button
+                    type="button"
+                    (click)="aumentarQuantidade(item)"
+                    [disabled]="item.quantidade >= item.produto.estoque"
+                    aria-label="Aumentar quantidade"
+                  >+</button>
+                </div>
+              </div>
+
+              <div class="preco-item">
+                <div
+                  class="preco-unitario"
+                  *ngIf="item.produto.desconto && item.produto.desconto > 0"
+                >
+                  <span class="preco-antigo">
+                    R$ {{ item.produto.valor.toFixed(2).replace('.', ',') }}
+                  </span>
+                  <span>
+                    R$ {{ item.produto.valorDesconto?.toFixed(2)?.replace('.', ',') }} cada
+                  </span>
+                </div>
+
+                <span
+                  class="preco-unitario"
+                  *ngIf="!item.produto.desconto || item.produto.desconto <= 0"
+                >
+                  R$ {{ item.produto.valor.toFixed(2).replace('.', ',') }} cada
+                </span>
+
+                <strong>
+                  R$ {{ item.valorTotal.toFixed(2).replace('.', ',') }}
+                </strong>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <div class="acoes-lista">
+          <a routerLink="/discos" class="link-continuar">← CONTINUAR COMPRANDO</a>
+          <button type="button" class="limpar-cesta" (click)="limparCesta()">
+            LIMPAR CESTA
+          </button>
+        </div>
+      </div>
+
+      <aside class="resumo-pedido">
+        <p class="resumo-legenda">SEU PEDIDO</p>
+        <h2>Resumo</h2>
+
+        <div class="linha-resumo">
+          <span>Itens</span>
+          <span>{{ lista.length }}</span>
+        </div>
+
+        <div class="linha-resumo total">
+          <span>Total</span>
+          <strong>R$ {{ total.toFixed(2).replace('.', ',') }}</strong>
+        </div>
+
+        <button
+          type="button"
+          class="botao-finalizar"
+          (click)="finalizarCompra()"
+        >
+          FINALIZAR COMPRA
+        </button>
+
+        <p class="aviso-resumo">
+          Confira os itens e as quantidades antes de continuar.
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>

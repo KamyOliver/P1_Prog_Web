@@ -1,0 +1,55 @@
+* {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.card {
+  border: 0;
+}
+
+.card-header {
+  padding: 16px 20px;
+}
+
+.form-control {
+  border-color: #273014;
+  background-color: #12181b;
+  color: white;
+}
+
+.form-control::placeholder {
+  color: white;
+}
+
+.form-control:focus {
+  background-color: #12181b;
+  color: white;
+  border-color: #273014;
+  box-shadow: 0 0 0 4px #273014;
+}
+
+.btn-logar {
+  background-color: #12181b;
+  border-color: #749b22;
+  color: white;
+  transition: all 0.3s ease;
+}
+
+.btn-logar:hover {
+  background-color: #495e1d;
+  border-color: #12181b;
+  color: white;
+  cursor: pointer;                      
+  transform: translateY(-1px);
+}
+
+.alert {
+  background-color: #12181b;
+  border-color: #749b22;
+  color: white;
+}
+
+.alert-warning {
+  background-color: #12181b;
+  border-color: #749b22;
+  color: white;
+}
