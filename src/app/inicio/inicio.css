@@ -105,17 +105,119 @@
 }
 
 
-/* RESPONSIVIDADE - padronização de tamnho de imagem decorrendo a qualquer dispositivo 
-    */
+/* ==========================================
+   RESPONSIVIDADE - TABLET
+========================================== */
 
-@media (max-width: 768px) {
+@media screen and (max-width: 768px) {
+
   .inicio-banner {
-    height: 400px;
+    width: 100%;
+    height: auto;
+    overflow: visible;
   }
+
+  .lado-imagem {
+    width: 100%;
+    height: auto;
+  }
+
+  .imagem-banner {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+
+  /* CARROSSEL */
+
+  #promocoesCarousel {
+    width: 100%;
+  }
+
+  .imagem-promocao {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+
+  /* Setas um pouco maiores no tablet */
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 10%;
+  }
+
 }
 
-@media (max-width: 480px) {
+
+/* ==========================================
+   RESPONSIVIDADE - CELULAR
+========================================== */
+
+@media screen and (max-width: 480px) {
+
   .inicio-banner {
-    height: 300px;
+    width: 100%;
+    height: auto;
+    margin: 0;
+    padding: 0;
   }
+
+  .lado-imagem {
+    width: 100%;
+    height: auto;
+  }
+
+  .imagem-banner {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+    object-position: center;
+  }
+
+
+  /* CARROSSEL DE PROMOÇÕES */
+
+  #promocoesCarousel {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .carousel-inner {
+    width: 100%;
+  }
+
+  .carousel-item {
+    width: 100%;
+  }
+
+  .imagem-promocao {
+    display: block;
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+  }
+
+
+  /* Setas mais fáceis de clicar no celular */
+
+  .carousel-control-prev,
+  .carousel-control-next {
+    width: 12%;
+  }
+
+  .carousel-control-prev {
+    left: 0;
+  }
+
+  .carousel-control-next {
+    right: 0;
+  }
+
 }

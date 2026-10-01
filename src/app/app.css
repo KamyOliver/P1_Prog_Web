@@ -1,0 +1,120 @@
+/* ==========================================
+   RESPONSIVIDADE DO CABEÇALHO
+========================================== */
+
+
+/* TABLET */
+@media screen and (max-width: 768px) {
+
+  .cabecalho {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    width: 100%;
+    height: auto;
+
+    padding: 15px;
+
+    box-sizing: border-box;
+  }
+
+
+  #logotipo {
+    position: static;
+
+    width: 140px;
+    height: auto;
+
+    margin-bottom: 15px;
+  }
+
+
+  .cabecalho nav {
+    position: static;
+
+    width: 100%;
+  }
+
+
+  .cabecalho .btn-group {
+    display: flex;
+
+    justify-content: center;
+    flex-wrap: wrap;
+
+    width: 100%;
+
+    gap: 8px;
+  }
+
+
+  .cabecalho .botao-texto {
+    position: static;
+
+    padding: 8px 10px;
+
+    font-size: 14px;
+
+    text-align: center;
+  }
+
+}
+
+
+/* ==========================================
+   CELULAR
+========================================== */
+
+@media screen and (max-width: 480px) {
+
+  .cabecalho {
+    padding: 12px 10px;
+  }
+
+
+  #logotipo {
+    width: 125px;
+
+    margin-bottom: 12px;
+  }
+
+
+  .cabecalho .btn-group {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    width: 100%;
+
+    gap: 6px;
+  }
+
+
+  .cabecalho .botao-texto {
+    display: flex;
+
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    padding: 8px 4px;
+
+    box-sizing: border-box;
+
+    font-size: 12px;
+
+    white-space: nowrap;
+  }
+
+
+  .rodape {
+    width: 100%;
+
+    box-sizing: border-box;
+
+    text-align: center;
+  }
+
+}

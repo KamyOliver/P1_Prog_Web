@@ -6,7 +6,7 @@ import { Login } from './login/login';
 import { Pedido } from './model/pedido';
 import { Reenvio } from './reenvio/reenvio';
 import { ResultadoBusca } from './resultado-busca/resultado-busca';
-import { Vitrine } from './vitrine/vitrine';
+import { Discos } from './discos/discos';
 import { Inicio } from './inicio/inicio';
 import { Promocoes } from './promocoes/promocoes';
 
@@ -19,7 +19,7 @@ export const routes: Routes = [
   { path: 'pedido', component: Pedido },
   { path: 'reenvio', component: Reenvio },
   { path: 'resultado-busca', component: ResultadoBusca },
-  { path: 'vitrine', component: Vitrine },
+  { path: 'discos', component: Discos },
   { path: 'promocoes', component: Promocoes },
   { path: '', component: Inicio }
 ];

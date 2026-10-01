@@ -1,4 +1,435 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+
+/* ==========================================
+   PÁGINA
+========================================== */
+
+.pagina-detalhe {
+  width: 100%;
+  min-height: 100vh;
+  padding: 50px 20px;
+  box-sizing: border-box;
+  background-color: #E8E5DC;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+/* ==========================================
+   CARD PRINCIPAL
+========================================== */
+
+.detalhe-produto {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  overflow: hidden;
+
+  background-color: #ffffff;
+
+  border-radius: 12px;
+
+  box-shadow: 0 4px 15px
+    rgba(0, 0, 0, 0.10);
+}
+
+
+/* ==========================================
+   ÁREA DA IMAGEM
+========================================== */
+
+.area-imagem {
+  position: relative;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 48%;
+
+  padding: 35px;
+
+  box-sizing: border-box;
+
+  background-color: #f5f4ef;
+}
+
+
 .produto-imagem {
-  max-height: 360px;
+  display: block;
+
+  width: 100%;
+  max-width: 400px;
+
+  height: auto;
+
   object-fit: contain;
+
+  border-radius: 8px;
+}
+
+
+/* ==========================================
+   DESCONTO
+========================================== */
+
+.desconto-detalhe {
+  position: absolute;
+
+  top: 25px;
+  left: 25px;
+
+  padding: 8px 12px;
+
+  background-color: #a4161a;
+  color: #ffffff;
+
+  border-radius: 6px;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  z-index: 2;
+}
+
+
+/* ==========================================
+   INFORMAÇÕES
+========================================== */
+
+.area-informacoes {
+  display: flex;
+  flex-direction: column;
+
+  width: 52%;
+
+  padding: 45px;
+
+  box-sizing: border-box;
+}
+
+
+.codigo-produto {
+  display: inline-block;
+
+  width: fit-content;
+
+  margin-bottom: 15px;
+
+  padding: 6px 10px;
+
+  background-color: #121b1c;
+  color: #ffffff;
+
+  border-radius: 5px;
+
+  font-size: 11px;
+  font-weight: 600;
+}
+
+
+.nome-produto {
+  margin: 0 0 5px 0;
+
+  color: #12181b;
+
+  font-size: 32px;
+  font-weight: 700;
+}
+
+
+.artista-produto {
+  margin: 0 0 25px 0;
+
+  color: #667A3F;
+
+  font-size: 20px;
+  font-weight: 500;
+}
+
+
+/* ==========================================
+   INFORMAÇÕES DO DISCO
+========================================== */
+
+.informacoes-disco {
+  color: #555555;
+
+  font-size: 14px;
+}
+
+
+.informacoes-disco p {
+  margin: 7px 0;
+}
+
+
+.informacoes-disco strong {
+  color: #12181b;
+}
+
+
+/* ==========================================
+   LINHA
+========================================== */
+
+.linha-detalhe {
+  width: 100%;
+  height: 1px;
+
+  margin: 25px 0;
+
+  background-color: #dedbd1;
+}
+
+
+/* ==========================================
+   PREÇO
+========================================== */
+
+.area-preco {
+  margin-bottom: 20px;
+}
+
+
+.texto-preco {
+  margin: 0 0 4px 0;
+
+  color: #777777;
+
+  font-size: 13px;
+}
+
+
+.texto-preco.promocao {
+  margin-top: 10px;
+}
+
+
+.preco-antigo {
+  color: #777777;
+
+  font-size: 16px;
+
+  text-decoration: line-through;
+}
+
+
+.preco-promocional {
+  display: block;
+
+  color: #4f6233;
+
+  font-size: 30px;
+  font-weight: 700;
+}
+
+
+.preco-normal {
+  display: block;
+
+  color: #4f6233;
+
+  font-size: 30px;
+  font-weight: 700;
+}
+
+
+/* ==========================================
+   ESTOQUE
+========================================== */
+
+.produto-disponivel {
+  width: fit-content;
+
+  margin-bottom: 25px;
+
+  padding: 8px 12px;
+
+  background-color: #edf3e2;
+  color: #4f6233;
+
+  border-radius: 6px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+.produto-indisponivel {
+  width: fit-content;
+
+  margin-bottom: 25px;
+
+  padding: 8px 12px;
+
+  background-color: #f8dddd;
+  color: #a4161a;
+
+  border-radius: 6px;
+
+  font-size: 13px;
+  font-weight: 600;
+}
+
+
+/* ==========================================
+   BOTÕES
+========================================== */
+
+.acoes-produto {
+  display: flex;
+
+  gap: 10px;
+
+  width: 100%;
+
+  margin-top: auto;
+}
+
+
+.botao-comprar {
+  flex: 1;
+
+  padding: 12px;
+
+  background-color: #8AAE3F;
+  color: #ffffff;
+
+  border: 1px solid #8AAE3F;
+  border-radius: 6px;
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.botao-comprar:hover {
+  background-color: #667A3F;
+  border-color: #667A3F;
+}
+
+
+.botao-voltar {
+  flex: 1;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 12px;
+
+  background-color: transparent;
+  color: #667A3F;
+
+  border: 1px solid #667A3F;
+  border-radius: 6px;
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 12px;
+  font-weight: 700;
+
+  text-align: center;
+  text-decoration: none;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+.botao-voltar:hover {
+  background-color: #667A3F;
+  color: #ffffff;
+}
+
+
+/* ==========================================
+   PRODUTO NÃO ENCONTRADO
+========================================== */
+
+.produto-nao-encontrado {
+  max-width: 600px;
+
+  margin: 50px auto;
+
+  padding: 40px;
+
+  background-color: #ffffff;
+
+  border-radius: 12px;
+
+  text-align: center;
+}
+
+
+.produto-nao-encontrado h2 {
+  margin-top: 0;
+
+  color: #12181b;
+}
+
+
+.produto-nao-encontrado p {
+  margin-bottom: 25px;
+
+  color: #555555;
+}
+
+
+/* ==========================================
+   RESPONSIVIDADE
+========================================== */
+
+@media (max-width: 768px) {
+
+  .pagina-detalhe {
+    padding: 25px 15px;
+  }
+
+
+  .detalhe-produto {
+    flex-direction: column;
+  }
+
+
+  .area-imagem {
+    width: 100%;
+
+    padding: 25px;
+  }
+
+
+  .produto-imagem {
+    max-width: 350px;
+  }
+
+
+  .area-informacoes {
+    width: 100%;
+
+    padding: 30px;
+  }
+
+
+  .nome-produto {
+    font-size: 26px;
+  }
+
+
+  .acoes-produto {
+    flex-direction: column;
+  }
+
 }

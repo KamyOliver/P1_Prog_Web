@@ -1,40 +1,210 @@
-<div class="container py-4">
+<section class="pagina-detalhe">
+
   @if (produto) {
-    <div class="row justify-content-center">
-      <div class="col-12 col-lg-9">
-        <div class="card shadow-sm">
-          <div class="row g-0">
-            <div class="col-md-5 d-flex align-items-center justify-content-center bg-light p-4">
-              <img class="img-fluid produto-imagem" [src]="produto.codigo + '.jpg'"
-                [alt]="produto.nome" onerror="this.style.display='none'">
+
+    <div class="container">
+
+      <div class="detalhe-produto">
+
+
+        <!-- ===================================== -->
+        <!-- IMAGEM DO DISCO -->
+        <!-- ===================================== -->
+
+        <div class="area-imagem">
+
+          <!-- Desconto -->
+          @if (produto.desconto && produto.desconto > 0) {
+
+            <div class="desconto-detalhe">
+              -{{ produto.desconto }}%
             </div>
 
-            <div class="col-md-7">
-              <div class="card-body p-4">
-                <span class="badge text-bg-secondary mb-2">Código: {{ produto.codigo }}</span>
-                <h2 class="card-title">{{ produto.nome }}</h2>
-                <p class="card-text text-secondary">{{ produto.descritivo }}</p>
+          }
 
-                @if (produto.promo > 0) {
-                  <p class="mb-1">De: <s>R$ {{ produto.valor.toFixed(2) }}</s></p>
-                  <h3 class="text-success">Por: R$ {{ produto.promo.toFixed(2) }}</h3>
-                } @else {
-                  <h3>R$ {{ produto.valor.toFixed(2) }}</h3>
-                }
 
-                @if (produto.quantidade > 0) {
-                  <div class="alert alert-success py-2">Em estoque: {{ produto.quantidade }} unidade(s)</div>
-                  <button class="btn btn-success">Comprar</button>
-                } @else {
-                  <div class="alert alert-danger py-2">Produto indisponível no momento.</div>
-                }
+          <!-- Capa -->
+          <img
+            class="produto-imagem"
+            [src]="'discos/' + produto.codigo + '.png'"
+            [alt]="produto.album"
+          >
 
-                <a routerLink="/vitrine" class="btn btn-outline-secondary ms-2">Voltar</a>
-              </div>
-            </div>
-          </div>
         </div>
+
+
+        <!-- ===================================== -->
+        <!-- INFORMAÇÕES DO DISCO -->
+        <!-- ===================================== -->
+
+        <div class="area-informacoes">
+
+
+          <!-- Código -->
+          <span class="codigo-produto">
+            CÓDIGO: {{ produto.codigo }}
+          </span>
+
+
+          <!-- Álbum -->
+          <h1 class="nome-produto">
+            {{ produto.album }}
+          </h1>
+
+
+          <!-- Artista -->
+          <h2 class="artista-produto">
+            {{ produto.banda }}
+          </h2>
+
+
+          <!-- Informações -->
+          <div class="informacoes-disco">
+
+            <p>
+              <strong>Gênero:</strong>
+              {{ produto.genero }}
+            </p>
+
+            <p>
+              <strong>Estado:</strong>
+              {{ produto.estado }}
+            </p>
+
+          </div>
+
+
+          <div class="linha-detalhe"></div>
+
+
+          <!-- ===================================== -->
+          <!-- PREÇO -->
+          <!-- ===================================== -->
+
+          <div class="area-preco">
+
+
+            <!-- Produto com desconto -->
+
+            @if (
+              produto.desconto &&
+              produto.desconto > 0 &&
+              produto.valorDesconto !== undefined
+            ) {
+
+              <p class="texto-preco">
+                De:
+              </p>
+
+              <span class="preco-antigo">
+                R$ {{ produto.valor.toFixed(2).replace('.', ',') }}
+              </span>
+
+
+              <p class="texto-preco promocao">
+                Por:
+              </p>
+
+              <span class="preco-promocional">
+                R$ {{ produto.valorDesconto.toFixed(2).replace('.', ',') }}
+              </span>
+
+            } @else {
+
+              <!-- Produto sem desconto -->
+
+              <span class="preco-normal">
+                R$ {{ produto.valor.toFixed(2).replace('.', ',') }}
+              </span>
+
+            }
+
+          </div>
+
+
+          <!-- ===================================== -->
+          <!-- ESTOQUE -->
+          <!-- ===================================== -->
+
+          @if (produto.estoque > 0) {
+
+            <div class="produto-disponivel">
+              Em estoque: {{ produto.estoque }} unidade(s)
+            </div>
+
+          } @else {
+
+            <div class="produto-indisponivel">
+              Produto indisponível no momento.
+            </div>
+
+          }
+
+
+          <!-- ===================================== -->
+          <!-- BOTÕES -->
+          <!-- ===================================== -->
+
+          <div class="acoes-produto">
+
+
+            @if (produto.estoque > 0) {
+
+              <button
+                type="button"
+                class="botao-comprar"
+              >
+                COMPRAR
+              </button>
+
+            }
+
+
+            <!-- Volta para a página de origem -->
+
+            <a
+              [routerLink]="rotaVoltar"
+              class="botao-voltar"
+            >
+              {{ textoVoltar }}
+            </a>
+
+
+          </div>
+
+
+        </div>
+
       </div>
+
     </div>
+
+  } @else {
+
+
+    <!-- ===================================== -->
+    <!-- PRODUTO NÃO ENCONTRADO -->
+    <!-- ===================================== -->
+
+    <div class="produto-nao-encontrado">
+
+      <h2>
+        Produto não encontrado
+      </h2>
+
+      <p>
+        Não foi possível localizar este disco.
+      </p>
+
+      <a
+        routerLink="/discos"
+        class="botao-voltar"
+      >
+        VOLTAR PARA DISCOS
+      </a>
+
+    </div>
+
   }
-</div>
+
+</section>

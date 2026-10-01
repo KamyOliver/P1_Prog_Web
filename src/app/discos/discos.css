@@ -1,0 +1,839 @@
+:host {
+  display: block;
+  width: 100%;
+}
+
+
+/* =========================
+   PÁGINA
+========================= */
+
+.pagina-discos {
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  background-color: #667A3F;
+}
+
+
+/* =========================
+   BANNER
+========================= */
+
+.banner-discos {
+  width: 100%;
+
+  margin: 0;
+  padding: 0;
+}
+
+.imagem-discos {
+  display: block;
+
+  width: 100%;
+  height: auto;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================
+   CONTEÚDO ABAIXO DO BANNER
+========================= */
+
+.conteudo-discos {
+  display: flex;
+
+  width: 100%;
+  min-height: 650px;
+
+  margin: 0;
+  padding: 0;
+}
+
+
+/* =========================
+   ÁREA LATERAL DOS FILTROS
+========================= */
+
+.area-filtros {
+  width: 21%;
+  min-width: 250px;
+
+  background-color: #667A3F;
+
+  padding: 12px;
+
+  box-sizing: border-box;
+}
+
+
+/* Caixa escura */
+.caixa-filtros {
+  width: 100%;
+
+  background-color: #121b1c;
+
+  border-radius: 10px;
+
+  padding: 20px;
+
+  box-sizing: border-box;
+
+  font-family: 'Montserrat', sans-serif;
+
+  color: #ffffff;
+}
+
+
+/* Cabeçalho dos filtros */
+.cabecalho-filtros {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  gap: 10px;
+}
+
+
+/* Título FILTROS */
+.cabecalho-filtros h2 {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #ffffff !important;
+
+  font-family: 'Montserrat', sans-serif !important;
+
+  font-size: 17px !important;
+  font-weight: 700 !important;
+
+  line-height: 1 !important;
+}
+
+
+/* =========================
+   ÍCONE DOS FILTROS
+========================= */
+
+.icone-filtro {
+  position: relative;
+  display: inline-block;
+
+  width: 20px;
+  height: 16px;
+
+  flex-shrink: 0;
+}
+
+
+/* Linhas */
+.linha-icone {
+  position: absolute;
+  left: 0;
+
+  width: 20px;
+  height: 1.5px;
+
+  background-color: #ffffff;
+
+  border-radius: 2px;
+}
+
+
+/* Posição das linhas */
+.linha-1 {
+  top: 2px;
+}
+
+.linha-2 {
+  top: 7px;
+}
+
+.linha-3 {
+  top: 12px;
+}
+
+
+/* Bolinhas */
+.linha-icone::after {
+  content: '';
+
+  position: absolute;
+  top: -2px;
+
+  width: 4px;
+  height: 4px;
+
+  background-color: #ffffff;
+
+  border: 1px solid #ffffff;
+
+  border-radius: 50%;
+}
+
+
+/* Posição das bolinhas */
+.linha-1::after {
+  left: 4px;
+}
+
+.linha-2::after {
+  left: 12px;
+}
+
+.linha-3::after {
+  left: 7px;
+}
+
+
+/* =========================
+   LIMPAR FILTROS
+========================= */
+
+.limpar-filtros {
+  width: auto !important;
+  height: auto !important;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  border: none !important;
+
+  background: transparent !important;
+
+  color: #d8d8d8 !important;
+
+  font-family: 'Montserrat', sans-serif !important;
+
+  font-size: 10px !important;
+
+  text-decoration: underline;
+
+  cursor: pointer;
+}
+
+.limpar-filtros:hover {
+  color: #ffffff !important;
+}
+
+
+/* Linha divisória */
+.linha-filtro {
+  width: 100%;
+  height: 1px;
+
+  margin: 18px 0;
+
+  background-color: #526044;
+}
+
+
+/* =========================
+   GRUPOS DOS FILTROS
+========================= */
+
+.grupo-filtro {
+  width: 100%;
+}
+
+
+/* CATEGORIA + SETA */
+.titulo-grupo {
+  display: flex;
+
+  justify-content: space-between;
+  align-items: center;
+
+  width: 100%;
+
+  margin-bottom: 15px;
+}
+
+
+/* Título CATEGORIA */
+.titulo-grupo h3 {
+  margin: 0 !important;
+  padding: 0 !important;
+
+  color: #ffffff !important;
+
+  font-family: 'Montserrat', sans-serif !important;
+
+  font-size: 13px !important;
+  font-weight: 700 !important;
+
+  line-height: 1 !important;
+}
+
+
+/* Seta */
+.titulo-grupo span {
+  color: #ffffff;
+
+  font-size: 14px;
+}
+
+
+/* Opções */
+.opcao-filtro {
+  display: flex !important;
+
+  align-items: center;
+
+  gap: 9px;
+
+  width: 100%;
+
+  margin: 0 0 10px 0 !important;
+  padding: 0 !important;
+
+  color: #ffffff !important;
+
+  font-family: 'Montserrat', sans-serif !important;
+
+  font-size: 13px !important;
+
+  cursor: pointer;
+}
+
+
+/* Texto das opções */
+.opcao-filtro span {
+  margin: 0;
+  padding: 0;
+
+  color: #ffffff !important;
+
+  font-size: 13px !important;
+}
+
+
+/* Checkbox */
+.opcao-filtro input[type="checkbox"] {
+  width: 16px !important;
+  height: 16px !important;
+
+  min-width: 16px;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  accent-color: #8AAE3F;
+
+  cursor: pointer;
+}
+
+
+/* =========================
+   ÁREA DOS DISCOS
+========================= */
+
+.area-discos {
+  flex: 1;
+
+  min-height: 650px;
+
+  background-color: #E8E5DC;
+
+  padding: 35px;
+
+  margin: 0;
+
+  border-radius: 0;
+}
+
+
+/* =========================
+   GRADE DOS DISCOS
+========================= */
+
+.grade-discos {
+  width: 100%;
+  margin: 0;
+  align-items: start;
+}
+
+/* =========================
+   CARD DO DISCO
+========================= */
+
+.card-disco {
+  position: relative;
+
+  width: 260px;
+
+  background-color: #ffffff;
+
+  border-radius: 12px;
+
+  padding: 15px;
+
+  box-sizing: border-box;
+}
+
+
+/* Imagem do disco */
+.imagem-disco {
+  display: block;
+
+  width: 100%;
+  height: 230px;
+
+  object-fit: cover;
+
+  border-radius: 8px;
+}
+
+
+/* Etiqueta de desconto */
+.desconto {
+  position: absolute;
+
+  top: 10px;
+  left: 10px;
+
+  background-color: #a4161a;
+
+  color: #ffffff;
+
+  padding: 7px 10px;
+
+  border-radius: 6px;
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 16px;
+  font-weight: 500;
+
+  z-index: 2;
+}
+
+
+/* Nome do álbum */
+.card-disco h3 {
+  margin: 14px 0 3px;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  color: #12181b;
+}
+
+
+/* Banda */
+.banda {
+  margin: 0;
+
+  font-size: 15px;
+
+  color: #555;
+}
+
+
+/* Estado */
+.estado {
+  margin: 7px 0;
+
+  font-size: 13px;
+
+  color: #777;
+}
+
+
+/* =========================
+   PREÇOS
+========================= */
+
+.precos {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  margin-top: 10px;
+}
+
+
+/* Preço antigo */
+.preco-antigo {
+  color: #777;
+
+  font-size: 14px;
+
+  text-decoration: line-through;
+}
+
+
+/* Preço promocional */
+.preco-promocional {
+  color: #4f6233;
+
+  font-size: 18px;
+
+  font-weight: bold;
+}
+
+
+/* =========================
+   PAGINAÇÃO
+========================= */
+
+.paginacao {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  gap: 10px;
+
+  width: 100%;
+
+  margin-top: 35px;
+  margin-bottom: 25px;
+}
+
+
+/* Botões */
+.botao-pagina {
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+
+  padding: 0;
+
+  background-color: #f7f6f1;
+
+  color: #12181b;
+
+  border: 1px solid #dedbd1;
+
+  border-radius: 7px;
+
+  font-family: 'Montserrat', sans-serif;
+
+  font-size: 16px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+}
+
+
+/* Mouse sobre o botão */
+.botao-pagina:hover:not(:disabled):not(.pagina-ativa) {
+  background-color: #ece9df;
+
+  border-color: #8AAE3F;
+}
+
+
+/* Página selecionada */
+.botao-pagina.pagina-ativa {
+  background-color: #8AAE3F;
+
+  border-color: #8AAE3F;
+
+  color: #ffffff;
+
+  font-weight: 700;
+}
+
+
+/* Botão desativado */
+.botao-pagina:disabled {
+  color: #b8b8b8;
+
+  background-color: #f7f6f1;
+
+  border-color: #e5e2da;
+
+  cursor: default;
+
+  opacity: 0.6;
+}
+
+/* =========================
+   BOTÃO FILTRAR
+========================= */
+
+.botao-filtrar {
+  width: 100%;
+  margin-top: 18px;
+  padding: 12px;
+
+  background-color: #8AAE3F;
+  color: #ffffff;
+
+  border: none;
+  border-radius: 6px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 13px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botao-filtrar:hover {
+  background-color: #667A3F;
+}
+
+/* =====================================
+   BOTÕES DOS CARDS
+===================================== */
+
+.acoes-disco {
+  display: flex;
+  gap: 8px;
+  width: 100%;
+  margin-top: 15px;
+}
+
+
+/* VER DETALHES */
+.botao-detalhe {
+  flex: 1;
+  padding: 10px 8px;
+
+  background-color: transparent;
+  color: #667A3F;
+
+  border: 1px solid #667A3F;
+  border-radius: 6px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+
+  text-align: center;
+  text-decoration: none;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botao-detalhe:hover {
+  background-color: #667A3F;
+  color: #ffffff;
+}
+
+
+/* COMPRAR */
+.botao-comprar {
+  flex: 1;
+  padding: 10px 8px;
+
+  background-color: #8AAE3F;
+  color: #ffffff;
+
+  border: 1px solid #8AAE3F;
+  border-radius: 6px;
+
+  font-family: 'Montserrat', sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.botao-comprar:hover {
+  background-color: #667A3F;
+  border-color: #667A3F;
+}
+
+.preco-normal {
+  color: #4f6233;
+  font-size: 18px;
+  font-weight: bold;
+}
+
+/* =========================================
+   PAGINAÇÃO - DESKTOP
+========================================= */
+
+.paginas-desktop {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.paginas-mobile {
+  display: none;
+}
+
+/* TABLET */
+@media screen and (max-width: 768px) {
+}
+
+
+/* =========================================
+   CELULAR
+========================================= */
+
+/* =========================================
+   CELULAR
+========================================= */
+
+@media screen and (max-width: 480px) {
+
+  /* =====================================
+     ESTRUTURA DA PÁGINA
+  ===================================== */
+
+  .conteudo-discos {
+    flex-direction: column;
+  }
+
+
+  /* =====================================
+     ÁREA DOS FILTROS
+  ===================================== */
+
+  .area-filtros {
+    width: 100%;
+    min-width: 0;
+    padding: 12px;
+  }
+
+
+  /* =====================================
+     GRADE DOS DISCOS
+  ===================================== */
+
+  .grade-discos {
+    width: 100%;
+    justify-content: center;
+
+    margin-left: 0;
+    margin-right: 0;
+  }
+
+
+  /* =====================================
+     CARD DO DISCO
+  ===================================== */
+
+  .card-disco {
+    width: 92%;
+    max-width: 360px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    padding: 14px;
+  }
+
+
+  /* =====================================
+     IMAGEM DO DISCO
+  ===================================== */
+
+  .imagem-disco {
+    width: 100%;
+    height: 200px;
+
+    object-fit: cover;
+
+    border-radius: 8px;
+  }
+
+
+  /* =====================================
+     ESPAÇAMENTO DOS TEXTOS
+  ===================================== */
+
+  .card-disco h3 {
+    margin: 8px 0 2px;
+  }
+
+  .banda {
+    margin: 0;
+  }
+
+  .estado {
+    margin: 4px 0;
+  }
+
+  .precos {
+    margin-top: 6px;
+  }
+
+  .acoes-disco {
+    margin-top: 8px;
+  }
+
+
+  /* =====================================
+     PAGINAÇÃO
+  ===================================== */
+
+  .paginacao {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 100%;
+
+    gap: 6px;
+
+    flex-wrap: nowrap;
+
+    margin-top: 20px;
+    margin-bottom: 20px;
+  }
+
+
+  /* Esconde os números da versão desktop */
+
+  .paginas-desktop {
+    display: none;
+  }
+
+
+  /* Mostra somente os números da versão mobile */
+
+  .paginas-mobile {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    gap: 6px;
+  }
+
+
+  /* Botões da paginação */
+
+  .botao-pagina {
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+
+    padding: 0;
+
+    font-size: 13px;
+
+    border-radius: 6px;
+  }
+
+}

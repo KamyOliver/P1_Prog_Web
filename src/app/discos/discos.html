@@ -1,0 +1,421 @@
+<section class="pagina-discos">
+
+  <!-- ===================================== -->
+  <!-- BANNER -->
+  <!-- ===================================== -->
+
+  <section class="banner-discos">
+    <img
+      src="logodisco.png"
+      alt="Catálogo de discos Abbey Road Records"
+      class="imagem-discos"
+    >
+  </section>
+
+
+  <!-- ===================================== -->
+  <!-- CONTEÚDO -->
+  <!-- ===================================== -->
+
+  <section class="conteudo-discos">
+
+
+    <!-- ===================================== -->
+    <!-- FILTROS -->
+    <!-- ===================================== -->
+
+    <aside class="area-filtros">
+
+      <div class="caixa-filtros">
+
+
+        <!-- Cabeçalho -->
+
+        <div class="cabecalho-filtros">
+
+          <h2>
+
+            <span class="icone-filtro">
+              <span class="linha-icone linha-1"></span>
+              <span class="linha-icone linha-2"></span>
+              <span class="linha-icone linha-3"></span>
+            </span>
+
+            FILTROS
+
+          </h2>
+
+
+          <button
+            type="button"
+            class="limpar-filtros"
+            (click)="limparFiltros()"
+          >
+            Limpar filtros
+          </button>
+
+        </div>
+
+
+        <div class="linha-filtro"></div>
+
+
+        <!-- ===================================== -->
+        <!-- GÊNERO -->
+        <!-- ===================================== -->
+
+        <div class="grupo-filtro">
+
+          <div class="titulo-grupo">
+            <h3>GÊNERO</h3>
+            <span>−</span>
+          </div>
+
+
+          <label class="opcao-filtro">
+
+            <input
+              type="checkbox"
+              value="Grunge"
+              [checked]="categoriasSelecionadas.includes('Grunge')"
+              (change)="selecionarCategoria('Grunge', $event)"
+            >
+
+            <span>Grunge</span>
+
+          </label>
+
+
+          <label class="opcao-filtro">
+
+            <input
+              type="checkbox"
+              value="Rock"
+              [checked]="categoriasSelecionadas.includes('Rock')"
+              (change)="selecionarCategoria('Rock', $event)"
+            >
+
+            <span>Rock</span>
+
+          </label>
+
+
+          <label class="opcao-filtro">
+
+            <input
+              type="checkbox"
+              value="Rap"
+              [checked]="categoriasSelecionadas.includes('Rap')"
+              (change)="selecionarCategoria('Rap', $event)"
+            >
+
+            <span>Rap</span>
+
+          </label>
+
+
+          <label class="opcao-filtro">
+
+            <input
+              type="checkbox"
+              value="MPB"
+              [checked]="categoriasSelecionadas.includes('MPB')"
+              (change)="selecionarCategoria('MPB', $event)"
+            >
+
+            <span>MPB</span>
+
+          </label>
+
+        </div>
+
+
+        <div class="linha-filtro"></div>
+
+
+        <!-- ===================================== -->
+        <!-- ARTISTA -->
+        <!-- ===================================== -->
+
+        <div class="grupo-filtro">
+
+          <div class="titulo-grupo">
+            <h3>ARTISTA</h3>
+            <span>−</span>
+          </div>
+
+
+          <p
+            class="mensagem-filtro"
+            *ngIf="categoriasSelecionadas.length === 0"
+          >
+            Selecione um gênero primeiro.
+          </p>
+
+
+          <label
+            class="opcao-filtro"
+            *ngFor="let artista of artistasDisponiveis"
+          >
+
+            <input
+              type="checkbox"
+              [value]="artista"
+              [checked]="artistasSelecionados.includes(artista)"
+              (change)="selecionarArtista(artista, $event)"
+            >
+
+            <span>{{ artista }}</span>
+
+          </label>
+
+        </div>
+
+
+        <!-- Botão filtrar -->
+
+        <button
+          type="button"
+          class="botao-filtrar"
+          (click)="aplicarFiltros()"
+        >
+          FILTRAR
+        </button>
+
+
+      </div>
+
+    </aside>
+
+
+    <!-- ===================================== -->
+    <!-- CATÁLOGO -->
+    <!-- ===================================== -->
+
+    <main class="area-discos">
+
+
+      <!-- Caso nenhum produto seja encontrado -->
+
+      <div
+        class="alert alert-warning"
+        *ngIf="produtosFiltrados.length === 0"
+      >
+        <strong>Nenhum disco encontrado.</strong>
+        Tente selecionar outros filtros.
+      </div>
+
+
+      <!-- Grade Bootstrap -->
+
+      <div
+        class="row g-4 grade-discos"
+        *ngIf="produtosFiltrados.length > 0"
+      >
+
+
+        <!-- CARD -->
+
+        <div
+          class="col-12 col-sm-6 col-md-6 col-lg-4"
+          *ngFor="let obj of produtosPaginados"
+        >
+
+          <div class="card-disco">
+
+
+            <!-- Etiqueta de desconto -->
+            <!-- Só aparece quando existe desconto -->
+
+            <span
+              class="desconto"
+              *ngIf="obj.desconto && obj.desconto > 0"
+            >
+              -{{ obj.desconto }}%
+            </span>
+
+
+            <!-- Capa -->
+
+            <img
+              class="imagem-disco"
+              [src]="'discos/' + obj.codigo + '.png'"
+              [alt]="obj.album"
+            >
+
+
+            <!-- Álbum -->
+
+            <h3>
+              {{ obj.album }}
+            </h3>
+
+
+            <!-- Artista -->
+
+            <p class="banda">
+              {{ obj.banda }}
+            </p>
+
+
+            <!-- Estado -->
+
+            <p class="estado">
+              Estado: {{ obj.estado }}
+            </p>
+
+
+            <!-- ================================= -->
+            <!-- PREÇO COM PROMOÇÃO -->
+            <!-- ================================= -->
+
+            <div
+              class="precos"
+              *ngIf="obj.desconto && obj.desconto > 0"
+            >
+
+              <span class="preco-antigo">
+                R$ {{ obj.valor.toFixed(2).replace('.', ',') }}
+              </span>
+
+              <span class="preco-promocional">
+                R$ {{ obj.valorDesconto?.toFixed(2)?.replace('.', ',') }}
+              </span>
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- PREÇO NORMAL -->
+            <!-- ================================= -->
+
+            <div
+              class="precos"
+              *ngIf="!obj.desconto || obj.desconto <= 0"
+            >
+
+              <span class="preco-normal">
+                R$ {{ obj.valor.toFixed(2).replace('.', ',') }}
+              </span>
+
+            </div>
+
+
+            <!-- ================================= -->
+            <!-- BOTÕES -->
+            <!-- ================================= -->
+
+            <div class="acoes-disco">
+
+
+              <!-- Detalhes -->
+
+              <a
+                [routerLink]="['/detalhe']"
+                [queryParams]="{
+                  codigo: obj.codigo,
+                  origem: 'discos'
+                }"
+                class="botao-detalhe"
+              >
+                VER DETALHES
+              </a>
+
+
+              <!-- Comprar -->
+
+              <button
+                type="button"
+                class="botao-comprar"
+                *ngIf="obj.estoque > 0"
+              >
+                COMPRAR
+              </button>
+
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+
+<!-- ===================================== -->
+<!-- PAGINAÇÃO -->
+<!-- ===================================== -->
+
+<div
+  class="paginacao"
+  *ngIf="totalPaginas > 1"
+>
+
+  <!-- Página anterior -->
+
+  <button
+    type="button"
+    class="botao-pagina"
+    [disabled]="paginaAtual === 1"
+    (click)="mudarPagina(paginaAtual - 1)"
+  >
+    ‹
+  </button>
+
+
+  <!-- ===================================== -->
+  <!-- NÚMEROS - COMPUTADOR -->
+  <!-- ===================================== -->
+
+  <div class="paginas-desktop">
+
+    <button
+      type="button"
+      class="botao-pagina"
+      *ngFor="let pagina of paginas"
+      [class.pagina-ativa]="paginaAtual === pagina"
+      (click)="mudarPagina(pagina)"
+    >
+      {{ pagina }}
+    </button>
+
+  </div>
+
+
+  <!-- ===================================== -->
+  <!-- NÚMEROS - CELULAR -->
+  <!-- ===================================== -->
+
+  <div class="paginas-mobile">
+
+    <button
+      type="button"
+      class="botao-pagina"
+      *ngFor="let pagina of paginasMobile"
+      [class.pagina-ativa]="paginaAtual === pagina"
+      (click)="mudarPagina(pagina)"
+    >
+      {{ pagina }}
+    </button>
+
+  </div>
+
+
+  <!-- Próxima página -->
+
+  <button
+    type="button"
+    class="botao-pagina"
+    [disabled]="paginaAtual === totalPaginas"
+    (click)="mudarPagina(paginaAtual + 1)"
+  >
+    ›
+  </button>
+
+</div>
+
+    </main>
+
+  </section>
+
+</section>

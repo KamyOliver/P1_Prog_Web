@@ -1,9 +1,21 @@
 export class Produto {
-    codigo:number=0;
-    nome:string="";
-    descritivo:string="";
-    quantidade:number=0;
-    valor:number=0;
-    promo:number=0;
-    destaque:number=0;
+
+  codigo: string = '';
+
+  genero: string = '';
+
+  banda: string = '';
+
+  album: string = '';
+
+  valor: number = 0;
+
+  desconto?: number = 0;
+
+  valorDesconto?: number = 0;
+
+  estado: string = '';
+
+  estoque: number = 0;
+
 }
