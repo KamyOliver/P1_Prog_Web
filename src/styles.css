@@ -76,3 +76,38 @@ footer {
 router-outlet {
   display: none;
 }
+
+/* Modos de Daltonismo */
+body.filter-protanopia {
+  filter: url('#protanopia');
+}
+
+body.filter-deuteranopia {
+  filter: url('#deuteranopia');
+}
+
+body.filter-tritanopia {
+  filter: url('#tritanopia');
+}
+
+body.filter-achromatopsia {
+  filter: url('#achromatopsia');
+}
+
+/* Alto Contraste */
+body.high-contrast {
+  background-color: #000 !important;
+  color: #fff !important;
+}
+
+body.high-contrast * {
+  background-color: #000 !important;
+  color: #fff !important;
+  border-color: #ff0 !important;
+}
+
+body.high-contrast a, 
+body.high-contrast button {
+  color: #ff0 !important;
+  text-decoration: underline !important;
+}

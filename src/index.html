@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
   <meta charset="utf-8">
   <title>Loja de Ferragens</title>
@@ -11,5 +11,66 @@
 </head>
 <body>
   <app-root></app-root>
+
+  <!-- Início do componente VLibras -->
+  <div vw class="enabled">
+    <div vw-access-button class="active"></div>
+    <div vw-plugin-wrapper>
+      <div class="vw-plugin-top-wrapper"></div>
+    </div>
+  </div>
+  <script src="https://vlibras.gov.br/app/vlibras-plugin.js"></script>
+  <script>
+    new window.VLibras.Widget('https://vlibras.gov.br/app');
+  </script>
+  <!-- Fim do componente VLibras -->
+
+  <!-- Filtros SVG para Daltonismo -->
+  <svg style="display: none;">
+    <defs>
+      <!-- Protanopia (dificuldade com vermelho) -->
+      <filter id="protanopia">
+        <feColorMatrix type="matrix" values="0.567, 0.433, 0,     0, 0
+                                             0.558, 0.442, 0,     0, 0
+                                             0,     0.242, 0.758, 0, 0
+                                             0,     0,     0,     1, 0"/>
+      </filter>
+      <!-- Deuteranopia (dificuldade com verde) -->
+      <filter id="deuteranopia">
+        <feColorMatrix type="matrix" values="0.625, 0.375, 0,   0, 0
+                                             0.7,   0.3,   0,   0, 0
+                                             0,     0.3,   0.7, 0, 0
+                                             0,     0,     0,   1, 0"/>
+      </filter>
+      <!-- Tritanopia (dificuldade com azul) -->
+      <filter id="tritanopia">
+        <feColorMatrix type="matrix" values="0.95, 0.05,  0,     0, 0
+                                             0,    0.433, 0.567, 0, 0
+                                             0,    0.475, 0.525, 0, 0
+                                             0,    0,     0,     1, 0"/>
+      </filter>
+      <!-- Acromatopsia (monocromático / escala de cinza) -->
+      <filter id="achromatopsia">
+        <feColorMatrix type="matrix" values="0.299, 0.587, 0.114, 0, 0
+                                             0.299, 0.587, 0.114, 0, 0
+                                             0.299, 0.587, 0.114, 0, 0
+                                             0,     0,     0,     1, 0"/>
+      </filter>
+    </defs>
+  </svg>
+
+  <!-- Funções de Controle de Acessibilidade -->
+  <script>
+    function aplicarDaltonismo(modo) {
+      document.body.classList.remove('filter-protanopia', 'filter-deuteranopia', 'filter-tritanopia', 'filter-achromatopsia');
+      if (modo && modo !== 'padrao') {
+        document.body.classList.add('filter-' + modo);
+      }
+    }
+
+    function toggleAltoContraste() {
+      document.body.classList.toggle('high-contrast');
+    }
+  </script>
 </body>
 </html>

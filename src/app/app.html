@@ -1,20 +1,49 @@
+<!-- Barra de Acessibilidade Superior (Daltonismo, Alto Contraste e Fontes) -->
+<aside class="bg-dark text-white py-1 px-3 d-flex justify-content-between align-items-center flex-wrap gap-2" aria-label="Opções de acessibilidade">
+  <span class="small fw-bold">Acessibilidade:</span>
+  
+  <div class="d-flex align-items-center gap-3">
+    <!-- Seletor de Daltonismo -->
+    <div class="d-flex align-items-center gap-1">
+      <label for="select-daltonismo" class="small mb-0 text-white">Cores:</label>
+      <select id="select-daltonismo" class="form-select form-select-sm w-auto" onchange="aplicarDaltonismo(this.value)" aria-label="Selecionar modo de cor para daltonismo">
+        <option value="padrao">Padrão</option>
+        <option value="protanopia">Protanopia (Vermelho)</option>
+        <option value="deuteranopia">Deuteranopia (Verde)</option>
+        <option value="tritanopia">Tritanopia (Azul)</option>
+        <option value="achromatopsia">Monocromático</option>
+      </select>
+    </div>
+
+    <!-- Alto Contraste -->
+    <button type="button" class="btn btn-outline-light btn-sm" onclick="toggleAltoContraste()" aria-label="Alternar modo de alto contraste">
+      Alto Contraste
+    </button>
+  </div>
+</aside>
+
+<!-- Cabeçalho Principal -->
 <header class="cabecalho">
-  <img src="logotipo.png" id="logotipo">
+  <img src="logotipo.png" id="logotipo" alt="Logotipo Loja de Vinil">
   <!--barra busca-->
-  <nav>
-    <div class="btn-group">
+  <nav aria-label="Navegação principal">
+    <div class="btn-group" role="navigation">
       <a routerLink="/inicio" class="botao-texto">Início</a>
       <a routerLink="/discos" class="botao-texto">Discos</a>
       <a routerLink="/promocoes" class="botao-texto">Promoções</a>
       <a routerLink="/cesta" class="botao-texto">Carrinho</a>
       <a routerLink="/login" class="botao-texto">Login</a>
       <a routerLink="/cadastro" class="botao-texto">Cadastrar</a>
-      </div>
+    </div>
   </nav>
 </header>
-<div>
+
+<!-- Conteúdo da Página -->
+<main id="conteudo-principal">
   <router-outlet />
-</div>
+</main>
+
+<!-- Rodapé -->
 <footer class="rodape">
   <p>© 2024 - Loja de Vinil</p>
 </footer>
